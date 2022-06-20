@@ -104,9 +104,10 @@ void GameBoard::updateEnemy()
    for (int i=0; i<enemies.size(); i++)
    {
        enemies[i]->update();
-       if(enemies[i]->getLimit().width> window->getSize().x)
+       if(enemies[i]->getLimit().left <10)
        {
-           //ship.isAlive(1);
+           ship.isAlive(1);
+           cout<<ship.setLive();
            enemies.erase(enemies.begin() +i);
            break;
        }
