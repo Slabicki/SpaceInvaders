@@ -93,7 +93,7 @@ void GameBoard::updateShoots()
     for (auto *shoot : shoots)
     {
         shoot->update();
-        if (shoot->getLimit().width < 0)
+        if (shoot->getLimit().width > window->getSize().x)
         {
             shoots.erase(shoots.begin());
         }
