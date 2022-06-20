@@ -6,18 +6,21 @@
 
 using namespace std;
 
-void GameBoard::CreateWindow() {
+void GameBoard::CreateWindow()
+{
     this->window = new sf::RenderWindow(sf::VideoMode(1200, 800), "Space-Invaders", sf::Style::Close);
     this->window->setFramerateLimit(144);
     this->window->setVerticalSyncEnabled(false);
 }
 
-void GameBoard::newShoot(){
+void GameBoard::newShoot()
+{
     textures=new sf::Texture();
     textures->loadFromFile("../Textures/shoot.png");
 }
 
-void GameBoard::newPlayer() {
+void GameBoard::newPlayer()
+{
 
     player=new Player();
     enemy=new Enemy(1500.f, 1500.f);
@@ -25,7 +28,8 @@ void GameBoard::newPlayer() {
     spawnEnemy=spawnEnemyMax;
 }
 
-GameBoard::GameBoard(){
+GameBoard::GameBoard()
+{
 
     CreateWindow();
     newPlayer();
@@ -48,13 +52,15 @@ GameBoard::GameBoard(){
     shipLive.setPosition(sf::Vector2f(18.f, 50.f));
 }
 
-GameBoard::~GameBoard(){
+GameBoard::~GameBoard()
+{
    delete this->window;
    delete this->player;
 }
 
 
-void GameBoard::play() {
+void GameBoard::play()
+{
     while(this->window->isOpen())
     {
         this->update();
@@ -70,7 +76,8 @@ void GameBoard::play() {
     }
 }
 
-void GameBoard::update() {
+void GameBoard::update()
+{
     sf::Event event;
     while (this->window->pollEvent(event))
     {
@@ -81,11 +88,13 @@ void GameBoard::update() {
     }
 }
 
-void GameBoard::updateShoots() {
-    for (auto *shoot : shoots) {
+void GameBoard::updateShoots()
+{
+    for (auto *shoot : shoots)
+    {
         shoot->update();
-
-        if (shoot->getLimit().top + shoot->getLimit().height < 0.f) {
+        if (shoot->getLimit().width < 0)
+        {
             shoots.erase(shoots.begin());
         }
     }
@@ -104,7 +113,7 @@ void GameBoard::updateEnemy()
    for (int i=0; i<enemies.size(); i++)
    {
        enemies[i]->update();
-       if(enemies[i]->getLimit().left <10)
+       if(enemies[i]->getLimit().left <0)
        {
            ship.isAlive(1);
            cout<<ship.setLive();
@@ -136,7 +145,8 @@ void GameBoard::updateHit()
     }
 }
 
-void GameBoard::worldSetup(){
+void GameBoard::worldSetup()
+{
 
     if (backgroundTexture.loadFromFile("../Textures/background5.jpg") != true)
     {
@@ -227,7 +237,8 @@ void GameBoard::renderEnemy()
     }
 }
 
-void GameBoard::render() {
+void GameBoard::render()
+{
 
     this->window->clear();
     this->worldSetup();
